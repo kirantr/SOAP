@@ -31,31 +31,38 @@
     </form>
 
     <?php
-    
+    echo '<ul>';
+    foreach ($sport as $value)
+    {
+
+        echo '<li>' . $value . '</li>';
+    }
+    echo '</ul>';
+
+
     echo
-        '<div class="col-md-offset-2 col-md-8 output">'
-            . '<table>'
-                . '<tr>'
-                    . '<th>Currency name</th>'
-                    . '<th>Nominal</th><th>Course</th>'
-                    . '<th>ISO Digital code</th>'
-                    . '<th>ISO Symbolic code</th>'
-               . '</tr>';
+    '<div class="col-md-offset-2 col-md-8 output">'
+    . '<table>'
+    . '<tr>'
+    . '<th>Currency name</th>'
+    . '<th>Nominal</th><th>Course</th>'
+    . '<th>ISO Digital code</th>'
+    . '<th>ISO Symbolic code</th>'
+    . '</tr>';
     foreach ($curs as $value)
     {
         echo
-                '<tr>'
-                    . '<td>'.$value->Vname.'</td>'
-                    . '<td>'.$value->Vnom.'</td>'
-                    . '<td>'.$value->Vcurs.'</td>'
-                    . '<td>'.$value->Vcode.'</td>'
-                    . '<td>'.$value->VchCode.'</td>'
-                . '</tr>';
+        '<tr>'
+        . '<td>' . $value->Vname . '</td>'
+        . '<td>' . $value->Vnom . '</td>'
+        . '<td>' . $value->Vcurs . '</td>'
+        . '<td>' . $value->Vcode . '</td>'
+        . '<td>' . $value->VchCode . '</td>'
+        . '</tr>';
     }
-        echo
-                '</table>' 
-        . '</div>';
-
+    echo
+    '</table>'
+    . '</div>';
     ?>
 </div>
 </body>

@@ -4,8 +4,7 @@ class CurlCbrClient
 {
 
     private $curl;
-    private $xmlString;
-    private $soapUrl = "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?op=GetCursOnDate";
+    private $url = "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?op=GetCursOnDate";
     private $headers = array(
         "Content-type: text/xml;charset=\"utf-8\"",
         "Accept: text/xml",
@@ -13,19 +12,18 @@ class CurlCbrClient
         "Pragma: no-cache",
         "SOAPAction: http://web.cbr.ru/GetCursOnDate"
     );
-    private $curs;
 
     public function __construct()
     {
         $this->curl = curl_init();
     }
 
-    private function getCurs($date)
+    public function getData($date)
     {
         date_default_timezone_set('Europe/Kiev');
         if (date('Y-m-d', strtotime($date)) == $date)
         {
-            $this->xmlPostString = '<?xml version="1.0" encoding="utf-8"?>
+            $this->xml = '<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope 
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -38,12 +36,12 @@ class CurlCbrClient
                 </soap:Envelope>';
 
             curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, 1);
-            curl_setopt($this->curl, CURLOPT_URL, $this->soapUrl);
+            curl_setopt($this->curl, CURLOPT_URL, $this->url);
             curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_setopt($this->curl, CURLOPT_TIMEOUT, 10);
             curl_setopt($this->curl, CURLOPT_POST, true);
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->xmlPostString);
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->xml);
             curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
 
             $response = curl_exec($this->curl);

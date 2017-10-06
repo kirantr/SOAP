@@ -8,7 +8,7 @@ class SoapCbrClient
         $this->objSoap = new SoapClient($url);
     }
 
-    public function getCurs($date)
+    public function getData($date)
     {
         date_default_timezone_set('Europe/Kiev');
         if (date('Y-m-d', strtotime($date)) == $date)
